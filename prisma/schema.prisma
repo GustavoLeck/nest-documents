@@ -1,0 +1,37 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model documents {
+  id              String           @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name            String           @db.VarChar
+  employe_id      String?          @db.Uuid
+  document_type   String?          @db.Uuid
+  status          String           @db.VarChar
+  create_at       DateTime         @db.Timestamp(6)
+  update_at       DateTime         @db.Timestamp(6)
+  documents_types documents_types? @relation(fields: [document_type], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  employe         employe?         @relation(fields: [employe_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model documents_types {
+  id        String      @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name      String      @db.VarChar
+  create_at DateTime    @db.Timestamp(6)
+  update_at DateTime    @db.Timestamp(6)
+  documents documents[]
+}
+
+model employe {
+  id        String      @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name      String      @db.VarChar
+  active    Boolean
+  create_at DateTime    @db.Timestamp(6)
+  update_at DateTime    @db.Timestamp(6)
+  documents documents[]
+}
