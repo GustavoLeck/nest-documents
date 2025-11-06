@@ -21,8 +21,17 @@ export class DocumentService {
     }
   }
 
-  async findAllPending(params: { employe_id?: string }) {
+  async findAllPending(params: {
+    employe_id?: string;
+    cursor?: string;
+    limit?: number;
+  }) {
     try {
+      let limit = params.limit || 25;
+      if (limit > 250) {
+        limit = 250;
+      }
+
       const whereClause = {
         status: 'PENDING',
       };
@@ -31,9 +40,18 @@ export class DocumentService {
         whereClause['employe_id'] = params.employe_id;
       }
 
-      return await this.prisma.documents.findMany({
+      const documents = await this.prisma.documents.findMany({
         where: whereClause,
+        take: limit + 1,
+        cursor: { id: params?.cursor },
+        orderBy: { create_at: 'asc' },
       });
+
+      const hasNextPage = documents.length > limit;
+      if (hasNextPage) {
+        documents.pop();
+      }
+      return { documents, hasNextPage };
     } catch (error) {
       throw new BadRequestException(error?.message);
     }
