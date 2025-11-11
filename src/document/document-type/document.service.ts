@@ -25,6 +25,7 @@ export class DocumentService {
     employe_id?: string;
     cursor?: string;
     limit?: number;
+    document_type_id?: string;
   }) {
     try {
       let limit = params.limit || 25;
@@ -40,11 +41,19 @@ export class DocumentService {
         whereClause['employe_id'] = params.employe_id;
       }
 
+      if (!isNil(params.cursor)) {
+        whereClause['id'] = { gt: params.cursor };
+      }
+
+      if (!isNil(params.document_type_id)) {
+        whereClause['document_type'] = params.document_type_id;
+      }
+
       const documents = await this.prisma.documents.findMany({
         where: whereClause,
         take: limit + 1,
         cursor: { id: params?.cursor },
-        orderBy: { create_at: 'asc' },
+        orderBy: { id: 'asc' },
       });
 
       const hasNextPage = documents.length > limit;
