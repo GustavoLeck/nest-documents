@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
-import { PrismaModule } from 'src/prisma/prisma.module';
 import { DocumentTypeService } from './document-type.service';
 import { DocumentTypeController } from './document-type.controller';
+import { PrismaModule } from 'src/prisma/prisma.module';
 
 @Module({
   imports: [PrismaModule],

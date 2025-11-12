@@ -1,6 +1,6 @@
 import { IsString } from 'class-validator';
 
-enum DocumentStatus {
+export enum DocumentStatus {
   PENDING = 'PENDING',
   APPROVED = 'APPROVED',
   REJECTED = 'REJECTED',

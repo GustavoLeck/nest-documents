@@ -1,15 +1,15 @@
-import { BadRequestException, HttpException, Injectable } from '@nestjs/common';
-import { PrismaService } from 'src/prisma/prisma.service';
-import { CreateDocumentDto } from './dto/create-document-type.dto';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { isNil } from 'lodash';
+import { CreateDocumentDto } from './dto/create-document.dto';
+import { PrismaService } from '../prisma/prisma.service';
 
 @Injectable()
 export class DocumentService {
-  constructor(private prisma: PrismaService) {}
+  constructor(private prismaService: PrismaService) {}
 
   async create(dto: CreateDocumentDto) {
     try {
-      return await this.prisma.documents.create({
+      return await this.prismaService.documents.create({
         data: {
           ...dto,
           update_at: new Date(),
@@ -41,18 +41,14 @@ export class DocumentService {
         whereClause['employe_id'] = params.employe_id;
       }
 
-      if (!isNil(params.cursor)) {
-        whereClause['id'] = { gt: params.cursor };
-      }
-
       if (!isNil(params.document_type_id)) {
-        whereClause['document_type'] = params.document_type_id;
+        whereClause['document_type_id'] = params.document_type_id;
       }
 
-      const documents = await this.prisma.documents.findMany({
+      const documents = await this.prismaService.documents.findMany({
         where: whereClause,
         take: limit + 1,
-        cursor: { id: params?.cursor },
+        cursor: params?.cursor ? { id: params?.cursor } : undefined,
         orderBy: { id: 'asc' },
       });
 

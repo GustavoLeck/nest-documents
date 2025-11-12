@@ -1,6 +1,6 @@
-import { BadRequestException, HttpException, Injectable } from '@nestjs/common';
-import { PrismaService } from 'src/prisma/prisma.service';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { CreateDocumentTypeDto } from './dto/create-document-type.dto';
+import { PrismaService } from '../prisma/prisma.service';
 
 @Injectable()
 export class DocumentTypeService {

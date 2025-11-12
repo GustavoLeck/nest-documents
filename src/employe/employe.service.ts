@@ -1,9 +1,8 @@
 import { BadRequestException, HttpException, Injectable } from '@nestjs/common';
-import { PrismaService } from 'src/prisma/prisma.service';
+import { PrismaService } from '../prisma/prisma.service';
 import { CreateEmployeDto } from './dto/create-employe.dto';
 import { UpdateEmployeDto } from './dto/update-employe.dto';
 import { UnlinkDocumentByType } from './dto/unlink-document-by-type.dto';
-import { isNil } from 'lodash';
 
 @Injectable()
 export class EmployeService {

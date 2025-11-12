@@ -1,7 +1,7 @@
 import { ApiTags } from '@nestjs/swagger';
 import { Body, Controller, Get, Param, Post, Put } from '@nestjs/common';
 import { DocumentService } from './document.service';
-import { CreateDocumentDto } from './dto/create-document-type.dto';
+import { CreateDocumentDto } from './dto/create-document.dto';
 
 @Controller('document')
 @ApiTags('Document')
