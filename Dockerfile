@@ -6,7 +6,8 @@ COPY ./package.json .
 COPY prisma ./prisma/
 COPY . .
 
-RUN yarn install
+RUN npm cache clean --force
+RUN npm install --verbose --production --max-sockets=1 --fetch-timeout=600000
 RUN npx prisma generate 
 RUN npx prisma db push 
 
