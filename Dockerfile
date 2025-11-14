@@ -7,7 +7,7 @@ COPY prisma ./prisma/
 COPY . .
 
 RUN npm cache clean --force
-RUN npm install --verbose --omit=dev --no-audit --no-fund --max-sockets=1 --fetch-timeout=300000
+RUN npm install --verbose --no-audit --no-fund --max-sockets=1 --fetch-timeout=300000
 RUN npx prisma generate 
 
 RUN npm run build
