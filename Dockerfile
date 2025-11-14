@@ -6,7 +6,7 @@ COPY ./package.json .
 COPY prisma ./prisma/
 COPY . .
 
-RUN npm install
+RUN yarn install
 RUN npx prisma generate 
 RUN npx prisma db push 
 
