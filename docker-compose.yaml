@@ -6,12 +6,12 @@ networks:
     driver: bridge
 
 services:
-  api:
+  nest-documents:
     build: .
     restart: on-failure
     container_name: ts-crud
     networks:
-      - postgreNet
+      - evolution-net
     image: nest-documents
     command: npm run start
     ports:
