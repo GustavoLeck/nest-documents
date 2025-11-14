@@ -9,10 +9,10 @@ services:
   nest-documents:
     build: .
     restart: on-failure
+    image: gustavoleck/nest-documents:latest
     container_name: nest-documents
     networks:
       - evolution-net
-    image: nest-documents
     command: npm run start
     ports:
       - "3000:3000"
