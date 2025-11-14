@@ -10,6 +10,6 @@ RUN npm cache clean --force
 RUN npm install --verbose --no-audit --no-fund --max-sockets=1 --fetch-timeout=300000
 RUN npx prisma generate 
 
-RUN npm run build
+RUN npx run build
 
 CMD npx prisma db push && npm run start
