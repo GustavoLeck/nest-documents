@@ -9,7 +9,7 @@ services:
   nest-documents:
     build: .
     restart: on-failure
-    container_name: ts-crud
+    container_name: nest-documents
     networks:
       - evolution-net
     image: nest-documents
