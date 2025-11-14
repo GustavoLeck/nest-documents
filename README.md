@@ -23,6 +23,12 @@
 
 ## Description
 
+Aplicação utilizando NestJs,
+Postgres como banco de dados,
+Prisma como ORM,
+Jest para testes,
+Docker para deploy
+
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
 ## Project setup
