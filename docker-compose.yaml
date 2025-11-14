@@ -1,8 +1,8 @@
 version: "3.3"
 
 networks:
-  postgreNet:
-    name: postgreNet
+  evolution-net:
+    name: evolution-net
     driver: bridge
 
 services:
