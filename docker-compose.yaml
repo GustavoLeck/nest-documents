@@ -13,6 +13,8 @@ services:
     container_name: nest-documents
     networks:
       - evolution-net
-    command: npm run start
+    # Usar comando de produção que não requer tsconfig nem fontes
+    # Executa migrações e sobe a aplicação compilada
+    command: sh -c "npx prisma migrate deploy && node dist/main.js"
     ports:
       - "3000:3000"
