@@ -7,7 +7,7 @@ import * as dotenv from 'dotenv';
 async function bootstrap() {
   dotenv.config();
   const app = await NestFactory.create(AppModule);
-  app.setGlobalPrefix('inmeta/api');
+  app.setGlobalPrefix('api');
   app.enableCors();
 
   const swaggerConfig = new DocumentBuilder()
@@ -41,7 +41,7 @@ async function bootstrap() {
   };
 
   const swaggerDocument = SwaggerModule.createDocument(app, swaggerConfig);
-  SwaggerModule.setup('InMeta/api', app, swaggerDocument);
+  SwaggerModule.setup('api', app, swaggerDocument);
 
   await app.listen(process.env.PORT ?? 3000);
   Logger.log(`Application is running on: ${await app.getUrl()}`);
