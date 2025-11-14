@@ -1,0 +1,18 @@
+version: "3.3"
+
+networks:
+  postgreNet:
+    name: postgreNet
+    driver: bridge
+
+services:
+  api:
+    build: .
+    restart: on-failure
+    container_name: ts-crud
+    networks:
+      - postgreNet
+    image: nest-documents
+    command: npm run start
+    ports:
+      - "3000:3000"
