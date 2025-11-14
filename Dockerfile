@@ -9,7 +9,8 @@ COPY . .
 RUN npm cache clean --force
 RUN npm install --verbose --no-audit --no-fund --max-sockets=1 --fetch-timeout=300000
 RUN npx prisma generate 
+RUN npx prisma db push --accept-data-loss
 
 RUN npx run build
 
-CMD npx prisma db push && npm run start
+CMD ["npm", "run", "start"]
